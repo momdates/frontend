@@ -1,0 +1,113 @@
+.App {
+  text-align: center;
+}
+
+.logo-style{
+  color:#330000;
+  font-size:36px;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 16px 5px;
+  border-bottom: 1px solid #efefef;
+  background-color:#FFDBCF;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size:14px;
+  font-weight:500;
+  text-transform:uppercase;
+  margin-right: 40px;
+}
+
+.nav-links a:last-of-type {
+  margin-right: 0;
+}
+
+.nav-links a.active {
+  border-bottom: 1px solid darkgray;
+}
+.form{
+  text-align:left;
+}
+.signup-form h1{
+  color: #330011;
+  font-size: 1.6rem;
+}
+
+.signup-form h6 {
+  color: #330011;
+}
+.signup-form{
+  margin:  2rem 30rem ;
+}
+
+.signup-form label{
+  font-size:1rem;
+  margin-left:.8rem;
+  color:grey;
+}
+
+.signup-form .btn{
+  margin-left:24rem;
+  background-color: #FFDBCF;
+  border-color: #FFDBCF;
+  color:#330011;
+}
+
+.signup-form .btn:hover{
+  background-color: #330011;
+  color:#FFDBCF;
+  border-color:#330011;
+} 
+
+.signup-buttons {
+  display:flex;
+  flex-direction:column;
+}
+
+.signup-buttons .btn{
+  margin: 0.5rem 38rem;
+}
+/* 
+.btn{
+  background-color: #FFDBCF;
+  border-color: #FFDBCF;
+  color:#330011;
+  margin: 0 20px;
+}
+
+.btn:hover{
+  background-color: #330011;
+  color:#FFDBCF;
+  border-color:#330011;
+} */
+.dashboard{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+
+.dash-content{
+  width:400px;
+  margin-top:20px;
+}
+
+.dash-card{
+  margin-bottom:50px;
+}
+
+
