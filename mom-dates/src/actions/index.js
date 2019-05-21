@@ -9,8 +9,9 @@ export const signup = creds => dispatch => {
     return axios
     .post(`http:localhost:3000/signup`, creds)
     .then(res => {
-        localStorage.setItem('token', res.data.payload)
-        dispatch ({ type: SIGNUP_SUCCESS })
+        console.log(res)
+        // localStorage.setItem('token', res.data.payload, )
+        // dispatch ({ type: SIGNUP_SUCCESS })
     })
     .catch(err => {
         dispatch({ type: SIGNUP_FAILURE, payload: err.data })

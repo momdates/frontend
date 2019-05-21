@@ -64,6 +64,8 @@ nav {
   background-color: #FFDBCF;
   border-color: #FFDBCF;
   color:#330011;
+  font-weight:bold;
+  text-transform: uppercase;
 }
 
 .signup-form .btn:hover{
