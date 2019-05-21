@@ -29,14 +29,15 @@ export class Location extends React.Component{
 
     render(){
         return(
-            <div> 
+            <div className="signup-form"> 
                 <h1> Where are you located? </h1>
+                <i class="fas fa-map-marker-alt"></i>
                     <Form onSubmit={this.props.onSubmit}>
                         <FormGroup>
                         <Label for="location">Choose your state from dropdown</Label>
-                        <select>
+                        <Input type="select" name="selectMulti" id="location">
                             {this.state.states.map((state,i) => <option key={i} value={state}>{state}</option>)}
-                        </select>
+                        </Input>
                 </FormGroup>
                 <FormGroup>
                     <Label for="zipcode">Zip Code</Label>

@@ -10,10 +10,26 @@ export const signup = creds => dispatch => {
     .post(`http:localhost:3000/signup`, creds)
     .then(res => {
         console.log(res)
-        // localStorage.setItem('token', res.data.payload, )
-        // dispatch ({ type: SIGNUP_SUCCESS })
+        // localStorage.setItem('token', res.data.payload )
+        // dispatch ({ type: SIGNUP_SUCCESS, payload: res.data.payload })
     })
     .catch(err => {
         dispatch({ type: SIGNUP_FAILURE, payload: err.data })
+    })
+}
+
+export const LOGIN_START = 'LOGIN_START';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+
+export const login = creds => dispatch =>{
+    dispatch({ type: LOGIN_START });
+    return axios
+    .post('http:localhost:3000/login', creds)
+    .then(res => {localStorage.setItem('token', res.data.payload);
+    dispatch({ type: LOGIN_SUCCESS, payload:res.data.payload })
+})
+    .catch(err => {
+        dispatch({ type: LOGIN_FAILURE, payload: err.data })
     })
 }

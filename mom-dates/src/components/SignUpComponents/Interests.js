@@ -29,8 +29,9 @@ export class Interests extends React.Component {
 
     render(){
         return(
-            <div>
-                <h1>Great. Now, tell us some things you're interested in.</h1>
+            <div className="signup-form">
+                <h1 className="interest-htag">Great. Now, tell us some things you're interested in.</h1>
+                <i class="fas fa-heart"></i>
                 <Form onSubmit={this.addInterest}>
                     <FormGroup>
                     <Input
@@ -41,10 +42,11 @@ export class Interests extends React.Component {
                     value={this.state.interest}
                     />
                     </FormGroup>
-                    <Button className="button-style" type="submit">Add Interests</Button>
+                    {/* <Button className="button-style" type="submit">Add Interests</Button> */}
                 </Form>
-                {this.state.interests && this.state.interests.map((interest,i) => <Button key={i}>{interest}</Button>)}
-                
+                <div className="interest-list">
+                {this.state.interests && this.state.interests.map((interest,i) => <Button className="interest-btn" key={i} disabled>{interest}</Button>)}
+                </div>
                 </div>
         )
     }

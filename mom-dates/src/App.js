@@ -21,11 +21,14 @@ function App() {
           <Link to="/dashboard">
             User Dashboard Icon
           </Link>
+          <Link to="/login">
+          Log In
+          </Link>
         </div>
       </nav>
       <Route exact path="/" component={SignUp} />
       <Route path= "/dashboard" component={DashBoard} />
-    
+      <Route path="/login" component={Login} />
     </div>
     </Router>
   );
