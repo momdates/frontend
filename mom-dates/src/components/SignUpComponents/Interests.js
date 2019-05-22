@@ -16,7 +16,7 @@ export class Interests extends React.Component {
 
     onSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit({interestForm:this.state})
+    this.props.onSubmit({interests:this.state.interests})
     }
 
     addInterest = e =>{

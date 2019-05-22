@@ -8,7 +8,6 @@ export class Location extends React.Component {
     states: [],
     zip: ""
 
-    // this.handleChanges=this.handleChanges.bind(this)
   };
 
   componentDidMount() {
@@ -26,7 +25,7 @@ export class Location extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit({ locationForm: this.state });
+    this.props.onSubmit({location: this.state.location, zip: this.state.zip });
   };
 
   render() {

@@ -28,7 +28,7 @@ function App() {
         </div>
       </nav>
       <Route exact path="/" component={SignUp} />
-      <PrivateRoute exact path= "/dashboard" component={DashBoard} />
+      <Route exact path= "/dashboard" component={DashBoard} />
       <Route path="/login" component={Login} />
     </div>
     </Router>

@@ -17,7 +17,7 @@ export class SignUpForm extends React.Component{
 
     onSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit({signUpForm:this.state})
+    this.props.onSubmit(this.state)
     }
 
     render(){
