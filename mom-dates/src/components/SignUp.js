@@ -11,15 +11,12 @@ class SignUp extends Component{
 state = {
     form: [],
     currentStep: 0,
-    dropdownOpen: false, 
-    signUp: []
+    dropdownOpen: false 
 }
 
 onSubmit = form =>{
-    if(this.state.currentStep>2){
-        this.setState({
-            signUp: this.props.signup(form)
-        })
+    if(this.state.currentStep===3){
+        this.props.signup(this.state.form)
     }
     this.setState({
        form:[ 
@@ -32,13 +29,13 @@ onSubmit = form =>{
 
 
 render(){
-    console.log(this.state.signUp)
+    console.log(this.state.form)
     return(
         <>
          {this.state.currentStep === 0 && <SignUpForm onSubmit={this.onSubmit} />}
          {this.state.currentStep === 1 && <Location onSubmit={this.onSubmit}  />} 
          {this.state.currentStep === 2 && <Interests onSubmit={this.onSubmit} />}
-         {this.state.currentStep >= 2 && <Button onClick={this.onSubmit}>Next</Button>}
+         {this.state.currentStep === 3 && <Button onClick={this.onSubmit}>Finish Sign Up</Button>}
         
          </>
         // put your form here pass in this.onSubmit as a prop 

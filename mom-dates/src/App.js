@@ -7,6 +7,7 @@ import SignUp from './components/SignUp';
 import DashBoard from './components/DashBoard';
 import NavBar from './components/NavBar';
 import SearchBar from './components/SearchBar';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
         </div>
       </nav>
       <Route exact path="/" component={SignUp} />
-      <Route path= "/dashboard" component={DashBoard} />
+      <PrivateRoute exact path= "/dashboard" component={DashBoard} />
       <Route path="/login" component={Login} />
     </div>
     </Router>

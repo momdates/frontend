@@ -23,7 +23,7 @@ export class Interests extends React.Component {
         e.preventDefault();
         this.setState({
             interests:[...this.state.interests, this.state.interest],
-            interest:''
+            interest:""
         })
     }
 
@@ -31,7 +31,7 @@ export class Interests extends React.Component {
         return(
             <div className="signup-form">
                 <h1 className="interest-htag">Great. Now, tell us some things you're interested in.</h1>
-                <i class="fas fa-heart"></i>
+                <i className="fas fa-heart"></i>
                 <Form onSubmit={this.addInterest}>
                     <FormGroup>
                     <Input
@@ -42,11 +42,12 @@ export class Interests extends React.Component {
                     value={this.state.interest}
                     />
                     </FormGroup>
-                    {/* <Button className="button-style" type="submit">Add Interests</Button> */}
+                    {/* <Button className="button-style" type="button">Add Interests</Button> */}
                 </Form>
                 <div className="interest-list">
                 {this.state.interests && this.state.interests.map((interest,i) => <Button className="interest-btn" key={i} disabled>{interest}</Button>)}
                 </div>
+                <Button onClick={this.onSubmit}>Next</Button>
                 </div>
         )
     }
