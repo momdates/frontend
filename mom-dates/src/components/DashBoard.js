@@ -1,9 +1,37 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
+import EventCard from './EventCard';
+import { connect } from 'react-redux';
+
+import { getData, deleteEvent, editevent, viewEvent } from '../actions'
 
 class DashBoard extends React.Component {
+state={
+    deletingEvent: null,
+    editingEvent: null,
+    viewingEvent: null,
+    fetchingEvents: false
+}
 
+componentDidMount(){
+    this.props.getData();
+}
+
+editEvent = (e) => {
+    e.preventDefault();
+    this.props.editEvent(this.props.events).then(()=>{
+        this.setState({editingEvent: null})
+    })
+}
+
+viewEvent= (e) => {
+    e.preventDefault();
+    this.props.viewEvent(this.props.events.id).then(()=>{
+        this.setState({viewingEvent:null})
+    })
+}
 
 render(){
     return (
@@ -24,7 +52,19 @@ render(){
                 </NavItem>
             </Nav>
             </div>
-            <div className="dash-content">
+            <div className="near-you" id="location">
+                <h1>Near You</h1>
+                <div className="dash-content">
+            {this.props.events.map((event,i) =>{
+                return (
+                    <EventCard event={event}  key={i} expimgurl={event.expimgurl} title={event.title} price={event.price} date={event.date} expdesc={event.expdesc} viewEvent={this.viewEvent}  />
+                )
+            })
+
+            }
+            </div>
+            </div>
+            {/* <div className="dash-content">
                 <div className="near-you" id="location">
                     <h1>Near You</h1>
                     <div className="dash-card">
@@ -79,10 +119,17 @@ render(){
                     </Card>
                     </div>
                 </div>
-            </div>
+            </div> */}
+
         </div>
     )
 }
 }
 
-export default DashBoard
+const mapStateToProps = ({
+    deletingEvent, events, fetchingEvents, editingEvent
+}) => ({
+    deletingEvent, events, fetchingEvents, editingEvent
+})
+
+export default withRouter(connect(mapStateToProps, { getData, deleteEvent, editevent, viewEvent })(DashBoard));

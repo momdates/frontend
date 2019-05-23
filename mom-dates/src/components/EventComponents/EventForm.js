@@ -4,7 +4,8 @@ import { Button, ButtonGroup, Form, FormGroup, Label, Input} from 'reactstrap';
 export default class EventForm extends React.Component{
     state={
         title: '',
-        explocation: ''
+        explocation: '',
+        dates:''
     }
     
     handleChanges= e => {
@@ -45,12 +46,21 @@ export default class EventForm extends React.Component{
                         value={this.state.explocation}
                         />
                     </FormGroup>
+                    <FormGroup>
+                    <Label for="dates"></Label>
+                    <Input
+                    type="text"
+                    name="dates"
+                    placeholder="Select Dates"
+                    onChange = {this.handleChanges}
+                    value={this.state.dates}
+                    />
+                </FormGroup>
                     <ButtonGroup>
                         <Button className="kids">Kid Free</Button>
                         <Button className="kids">Kid Friendly</Button>
-                        <Button>Select Dates</Button>
                     </ButtonGroup>
-                        <Button className="button-style">Sign Up</Button>
+                        <Button className="button-style">Next</Button>
                     </Form>
                     </div>
                 </div>

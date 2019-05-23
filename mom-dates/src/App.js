@@ -7,7 +7,7 @@ import SignUp from './components/SignUp';
 import DashBoard from './components/DashBoard';
 import NewEvent from './components/NewEvent';
 // import NavBar from './components/NavBar';
-// import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -17,6 +17,21 @@ function App() {
       <nav>
         <h1 className="logo-style">MomDate</h1>
         <div className="nav-links">
+          {(localStorage.getItem('token')) && 
+          (<div>
+          <Link to="/dashboard">
+          Neighborhood Icon
+          </Link> 
+          <Link to="/events">
+          Messages Icon
+          </Link>
+          <Link to="/search">
+          Search Icon
+          </Link>
+
+          </div>
+          )
+        }
           <Link to="/">
             Sign Up Icon
           </Link>
@@ -32,6 +47,7 @@ function App() {
       <PrivateRoute exact path= "/dashboard" component={DashBoard} />
       <Route path="/login" component={Login} />
       <Route exact path= "/events" component={NewEvent} />
+      <Route exact path="/search" component={SearchBar} />
     </div>
     </Router>
   );

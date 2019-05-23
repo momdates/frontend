@@ -17,7 +17,10 @@ import {
     USER_UNAUTHORIZED,
     DELETE_START,
     DELETE_SUCCESS,
-    DELETE_FAILURE
+    DELETE_FAILURE,
+    VIEW_EVENT_START,
+    VIEW_EVENT_SUCCESS,
+    VIEW_EVENT_FAILURE
 } from '../actions'
 
 const initialState ={
@@ -29,6 +32,7 @@ const initialState ={
     addingEvent: false, 
     deletingEvent: false,
     editingEvent: false,
+    viewingEvent: false,
     error: '',
     errorStatusCode:null,
     fetchingEvents: false,
@@ -162,7 +166,26 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 editingEvent:false,
                 error: action.payload
-            };    
+            };  
+        case VIEW_EVENT_START:
+            return{
+                ...state,
+                viewingEvent:true
+            };
+        case VIEW_EVENT_SUCCESS:
+            return{
+                ...state,
+                viewingEvent:false,
+                error:'',
+                errorStatusCode:null,
+                events: action.payload
+            };
+        case VIEW_EVENT_FAILURE:
+            return{
+                ...state,
+                viewingEvent:false,
+                error: action.payload
+            };       
         default:
         return state;
     }

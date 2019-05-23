@@ -61,7 +61,7 @@ export const addevent = event => dispatch => {
         dispatch({ type: ADD_EVENT_SUCCESS, payload: res.data });
     })
     .catch(err => {
-        if (err.response.status === 403) {
+        if (err.response === 403) {
             dispatch({ type: USER_UNAUTHORIZED, payload: err.response });
           } else {
         dispatch({ type: ADD_EVENT_FAILURE, payload: err.response })
@@ -83,7 +83,7 @@ export const addevent = event => dispatch => {
             dispatch({ type: EDIT_EVENT_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            if (err.response.status === 403) {
+            if (err.response === 403) {
                 dispatch({ type: USER_UNAUTHORIZED, payload: err.response });
             } else {
             dispatch({ type: EDIT_EVENT_FAILURE, payload: err.response })
@@ -98,17 +98,17 @@ export const addevent = event => dispatch => {
     export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
     export const USER_UNAUTHORIZED = 'FETCH_DATA_FAILURE';
 
-    export const getData = (event) => dispatch => {
+    export const getData = () => dispatch => {
     dispatch({ type: FETCH_DATA_START });
     axios
-        .get(`https://momdate-app.herokuapp.com/experience/${event.id}`, {
+        .get(`https://momdate-app.herokuapp.com/experiences/`, {
         headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
         dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
         })
         .catch(err => {
-        if (err.response.status === 403) {
+        if (err.response === 403) {
             dispatch({ type: USER_UNAUTHORIZED, payload: err.response });
         } else {
             dispatch({ type: FETCH_DATA_FAILURE, payload: err.response });
@@ -137,4 +137,27 @@ export const addevent = event => dispatch => {
             dispatch({ type: DELETE_FAILURE, payload: err.response });
         }
         })
+    }
+
+    export const VIEW_EVENT_START = 'VIEW_EVENT_START';
+    export const VIEW_EVENT_SUCCESS = 'VIEW_EVENT_SUCCESS';
+    export const VIEW_EVENT_FAILURE = 'VIEW_EVENT_FAILURE';
+
+    export const viewEvent = id => dispatch => {
+        dispatch({ type: VIEW_EVENT_START });
+        return axios
+        .get(`https://momdate-app.herokuapp.com/experience/${id}`, id, {
+            headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
+        })
+        .then(res => {
+            dispatch({ type: VIEW_EVENT_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            if (err.response === 403) {
+                dispatch({ type: USER_UNAUTHORIZED, payload: err.response });
+            } else {
+            dispatch({ type: VIEW_EVENT_FAILURE, payload: err.response })
+        }
+        });
+
     }
