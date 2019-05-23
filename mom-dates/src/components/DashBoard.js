@@ -28,9 +28,15 @@ editEvent = (e) => {
 
 viewEvent= (e) => {
     e.preventDefault();
-    this.props.viewEvent(this.props.events.id).then(()=>{
+    this.props.viewEvent(this.props.events).then(()=>{
         this.setState({viewingEvent:null})
+        window.location.reload()
     })
+}
+
+deleteEvent = id => {
+    this.setState({ deletingEventID: id });
+    this.props.deleteEvent(id);
 }
 
 render(){

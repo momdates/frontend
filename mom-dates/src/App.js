@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import './App.css';
 
 import Login from './components/Login';
@@ -12,7 +12,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
-    <Router>
+
     <div className="App">
       <nav>
         <h1 className="logo-style">MomDate</h1>
@@ -49,8 +49,7 @@ function App() {
       <Route exact path= "/events" component={NewEvent} />
       <Route exact path="/search" component={SearchBar} />
     </div>
-    </Router>
   );
 }
 
-export default App;
+export default withRouter(App);

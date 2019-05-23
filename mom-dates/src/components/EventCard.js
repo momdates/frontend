@@ -10,9 +10,9 @@ const EventCard= props =>{
                         <CardImg top width="100%" src={props.event.expimgurl} alt="Adventure Card" />
                         <CardBody>
                         <CardTitle className="card-title">{props.event.title}</CardTitle>
-                        <CardSubtitle className="card-subtitle">${props.event.price} per person {props.event.date}</CardSubtitle>
+                        <CardSubtitle className="card-subtitle">${props.event.price} per person {props.event.dates}</CardSubtitle>
                         <CardText className="card-text">{props.event.blurb}</CardText>
-                        <Button onClick={props.viewEvent} >Learn More</Button>
+                        <Button href={'/experiences/'+ props.event.expid} >Learn More</Button>
                         <Button>Book Now</Button>
                         </CardBody>
                     </Card>
