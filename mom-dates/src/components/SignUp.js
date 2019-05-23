@@ -29,7 +29,6 @@ onSubmit = form =>{
 
 
 render(){
-    console.log(this.state.form)
     return(
         <>
          {this.state.currentStep === 0 && <SignUpForm onSubmit={this.onSubmit} />}

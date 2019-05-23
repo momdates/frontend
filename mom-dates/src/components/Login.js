@@ -7,7 +7,7 @@ import { login } from '../actions';
 class Login extends React.Component{
     state={
         credentials: {
-            email:'',
+            username:'',
             password: ''
         }
     };
@@ -35,13 +35,13 @@ class Login extends React.Component{
                <h1>Welcome back.</h1>
                     <Form className="form" onSubmit={this.login} >
                     <FormGroup>
-                        <Label for="email">Email</Label>
+                        <Label for="username">Email</Label>
                         <Input
                         type="text"
-                        name="email"
+                        name="username"
                         placeholder="Enter Your Email Address"
-                        onChange = {this.handleChanges}
-                        value={this.state.email}
+                        onChange = {this.handleChange}
+                        value={this.state.credentials.username}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -50,7 +50,7 @@ class Login extends React.Component{
                         type="password"
                         name="password"
                         placeholder="Enter Your Password"
-                        onChange = {this.handleChanges}
+                        onChange = {this.handleChange}
                         value={this.state.password}
                         />
                     </FormGroup>

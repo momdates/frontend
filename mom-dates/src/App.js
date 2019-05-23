@@ -5,8 +5,9 @@ import './App.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import DashBoard from './components/DashBoard';
-import NavBar from './components/NavBar';
-import SearchBar from './components/SearchBar';
+import NewEvent from './components/NewEvent';
+// import NavBar from './components/NavBar';
+// import SearchBar from './components/SearchBar';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -28,8 +29,9 @@ function App() {
         </div>
       </nav>
       <Route exact path="/" component={SignUp} />
-      <Route exact path= "/dashboard" component={DashBoard} />
+      <PrivateRoute exact path= "/dashboard" component={DashBoard} />
       <Route path="/login" component={Login} />
+      <Route exact path= "/events" component={NewEvent} />
     </div>
     </Router>
   );

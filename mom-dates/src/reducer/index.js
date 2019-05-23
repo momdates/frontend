@@ -46,7 +46,6 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             signingUp: false,
-            token: action.payload,
             location: '',
             interest: {
                 ...this.state.interests,

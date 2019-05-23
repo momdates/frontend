@@ -19,8 +19,8 @@ render(){
                 <NavItem>
                     <NavLink href="#new-events">Try Something New</NavLink>
                 </NavItem>
-                <NavItem>
-                    <Button outline color="secondary" href="/event"><i className="fas fa-plus"></i> New Event</Button>
+                <NavItem>  
+                    <Button outline color="secondary" href="/events" ><i className="fas fa-plus"></i> New Event</Button>
                 </NavItem>
             </Nav>
             </div>

@@ -14,8 +14,8 @@ export const signup = creds => dispatch => {
     .post(`https://momdate-app.herokuapp.com/newuser`, formatCreds, 
            { headers: { "Content-Type":"application/json"  } }
     )
-    .then(res => {localStorage.setItem('token', res.data.payload )
-        dispatch ({ type: SIGNUP_SUCCESS, payload: res.data.payload })
+    .then(res => {
+        dispatch ({ type: SIGNUP_SUCCESS, payload: res })
     })
     .catch(err => {
         dispatch({ type: SIGNUP_FAILURE, payload: err.data })
@@ -27,6 +27,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const login = creds => dispatch =>{
+    console.log(creds)
     dispatch({ type: LOGIN_START });
    return fetch("https://momdate-app.herokuapp.com/oauth/token", {
   body: `grant_type=password&username=${creds.username}&password=${creds.password}`,
@@ -36,8 +37,8 @@ export const login = creds => dispatch =>{
   },
   method: "POST"
 })  .then(res =>res.json())
-    .then(res => {localStorage.setItem('token', res);
-    dispatch({ type: LOGIN_SUCCESS, payload:res.data.payload })
+    .then(res => {localStorage.setItem('token', res.access_token);
+    dispatch({ type: LOGIN_SUCCESS, payload:res.access_token })
 })
     .catch(err => {
         dispatch({ type: LOGIN_FAILURE, payload: err.data })
@@ -49,10 +50,12 @@ export const ADD_EVENT_SUCCESS = 'ADD_EVENT_SUCCESS';
 export const ADD_EVENT_FAILURE = 'ADD_EVENT_FAILURE';
 
 export const addevent = event => dispatch => {
+    let formatEvent={}
+    event.forEach(e => formatEvent = {...formatEvent, ...e})
     dispatch({ type: ADD_EVENT_START });
     return axios 
-    .post('https://momdate-app.herokuapp.com/oauth/token', event, {
-        header: { Authorization: localStorage.getItem('token') }
+    .post('https://momdate-app.herokuapp.com/newexp', formatEvent, {
+        headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
     })
     .then(res => {
         dispatch({ type: ADD_EVENT_SUCCESS, payload: res.data });
@@ -73,8 +76,8 @@ export const addevent = event => dispatch => {
     export const editevent = event => dispatch => {
         dispatch({ type: EDIT_EVENT_START });
         return axios
-        .put(`https://momdate-app.herokuapp.com/oauth/token`, event, {
-            headers: { Authorization: localStorage.getItem('token') }
+        .put(`https://momdate-app.herokuapp.com/exp/${event.id}`, event, {
+            headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
             dispatch({ type: EDIT_EVENT_SUCCESS, payload: res.data });
@@ -95,11 +98,11 @@ export const addevent = event => dispatch => {
     export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
     export const USER_UNAUTHORIZED = 'FETCH_DATA_FAILURE';
 
-    export const getData = () => dispatch => {
+    export const getData = (event) => dispatch => {
     dispatch({ type: FETCH_DATA_START });
     axios
-        .get('https://momdate-app.herokuapp.com/oauth/token', {
-        headers: { Authorization: localStorage.getItem('token') }
+        .get(`https://momdate-app.herokuapp.com/experience/${event.id}`, {
+        headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
         dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
@@ -120,8 +123,8 @@ export const addevent = event => dispatch => {
     export const deleteEvent = id => dispatch => {
     dispatch({ type: DELETE_START });
     axios
-        .delete(`https://momdate-app.herokuapp.com/event/${id}`, {
-        headers: { Authorization: localStorage.getItem('token') }
+        .delete(`https://momdate-app.herokuapp.com/exp/${id}`, {
+        headers: {"Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
         dispatch({ type: DELETE_SUCCESS, payload: res.data });

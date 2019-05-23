@@ -12,7 +12,7 @@ const PrivateRoute = ({
         <Route
         {...rest}
         render ={props =>
-        token && errorStatusCode !== 403 ? (
+        (localStorage.getItem('token')) ? (
             <Component {...props} />
         ) : (
             <Redirect to="/login" />
@@ -22,14 +22,16 @@ const PrivateRoute = ({
     );
 };
 
-const mapStateToProps = ({ token, errorStatusCode }) => ({
-    errorStatusCode,
-    token
-});
+export default PrivateRoute;
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        {}
-    )(PrivateRoute)
-);
+// const mapStateToProps = ({ token, errorStatusCode }) => ({
+//     errorStatusCode,
+//     token
+// });
+
+// export default withRouter(
+//     connect(
+//         mapStateToProps,
+//         {}
+//     )(PrivateRoute)
+// );
