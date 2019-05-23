@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Rubik', sans-serif;
 }
 
 .logo-style{
   color:#330000;
   font-size:36px;
+  font-weight:bold;
 }
 
 
@@ -41,32 +45,41 @@ nav {
 .form{
   text-align:left;
 }
-.signup-form h1{
-  color: #330011;
+.signup-form h1, .login-form h1{
+  color: #8E585F;
   font-size: 1.6rem;
+  font-weight:bold;
 }
 
-.signup-form h6 {
+.login-form h1{
+  text-align:left;
+  margin-bottom:3rem;
+}
+
+.signup-form h6, .login-form h6 {
   color: #330011;
 }
-.signup-form{
+.signup-form, .login-form{
   margin:  2rem 30rem ;
 }
 
-.signup-form label{
+.signup-form label, .login-form label{
   font-size:1rem;
   margin-left:.8rem;
   color:grey;
 }
 
-.signup-form .btn{
+.signup-form .btn, .login-form .btn{
   margin-left:24rem;
   background-color: #FFDBCF;
   border-color: #FFDBCF;
   color:#330011;
+  font-weight:bold;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 2px grey;
 }
 
-.signup-form .btn:hover{
+.signup-form .btn:hover, .login-form .btn:hover{
   background-color: #330011;
   color:#FFDBCF;
   border-color:#330011;
@@ -79,7 +92,37 @@ nav {
 
 .signup-buttons .btn{
   margin: 0.5rem 38rem;
+  border-radius: 2rem;
+  font-weight:bold;
 }
+
+.sign-in{
+  border-radius:0.5rem;
+}
+
+.signup-signin{
+  border-color: #FFDBCF;
+  color:#330011;
+  padding: 0.2rem 2rem;
+}
+
+.signup-signin:hover {
+  background-color: #330011;
+  color:#FFDBCF;
+  border-color:#330011;
+}
+
+.fa-facebook-square, .fa-envelope {
+  margin-right:1rem;
+}
+
+
+.fa-heart, .fa-map-marker-alt {
+  font-size:1.5rem;
+  margin: 1rem 0 3rem;
+  color:grey;
+}
+
 /* 
 .btn{
   background-color: #FFDBCF;
@@ -104,10 +147,68 @@ nav {
 .dash-content{
   width:400px;
   margin-top:20px;
+  font-weight:bold;
+}
+
+.dash-content h1{
+  color: #8E585F;
+  font-size: 1.6rem;
+  font-weight:bold;
 }
 
 .dash-card{
   margin-bottom:50px;
+  box-shadow: 1px 1px 1px 1px grey;
 }
 
+.dash-card .btn{
+  background-color: #FFDBCF;
+  border-color: #FFDBCF;
+  color:#330011;
+  font-weight:bold;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 2px grey;
+  border-radius:0.5rem;
+  margin: 0 1.98rem;
+}
 
+.card-title{
+  color: #330011;
+  font-size:1.4rem;
+  text-align:right;
+}
+
+.card-subtitle{
+  font-weight:400;
+  font-size:0.7rem;
+}
+
+.card-text{
+  font-size:0.9rem;
+}
+
+.interest-list{
+  width:400px;
+  margin-top:20px;
+  font-weight:bold;
+  display:flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+}
+
+.interest-list .btn{
+  margin-left: 0;
+  background:white;
+  color:grey;
+  font-weight:100;
+  text-transform:none;
+}
+
+.interest-btn{
+  margin: 1rem;
+  padding: 0 2rem;
+}
+
+.interest-htag{
+  padding: 0 7rem;
+}
