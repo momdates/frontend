@@ -9,10 +9,11 @@ import { getData, deleteEvent, editevent, viewEvent } from '../actions'
 
 class DashBoard extends React.Component {
 state={
-    deletingEvent: null,
-    editingEvent: null,
-    viewingEvent: null,
-    fetchingEvents: false
+    // deletingEvent: null,
+    // editingEvent: null,
+    // viewingEvent: null,
+    // fetchingEvents: false,
+    // events:[]
 }
 
 componentDidMount(){
@@ -21,17 +22,17 @@ componentDidMount(){
 
 editEvent = (e) => {
     e.preventDefault();
-    this.props.editEvent(this.props.events).then(()=>{
-        this.setState({editingEvent: null})
-    })
+    this.props.editEvent(this.props.events)
+    // .then(()=>{
+    //     this.setState({editingEvent: null})
+    // })
 }
 
-viewEvent= (e) => {
+viewEvent= (e, expid, events) => {
     e.preventDefault();
-    this.props.viewEvent(this.props.events).then(()=>{
-        this.setState({viewingEvent:null})
-        window.location.reload()
-    })
+    // console.log(events);
+    this.props.viewEvent(expid, events)
+    .then(()=>this.props.history.push(`/experience/${expid}`))
 }
 
 deleteEvent = id => {
@@ -61,9 +62,9 @@ render(){
             <div className="near-you" id="location">
                 <h1>Near You</h1>
                 <div className="dash-content">
-            {this.props.events.map((event,i) =>{
+            {this.props.events.length && this.props.events.map((event,i) =>{
                 return (
-                    <EventCard event={event}  key={i} expimgurl={event.expimgurl} title={event.title} price={event.price} date={event.date} expdesc={event.expdesc} viewEvent={this.viewEvent}  />
+                    <EventCard event={event} events={this.props.events}  key={i} viewEvent={this.viewEvent}  />
                 )
             })
 

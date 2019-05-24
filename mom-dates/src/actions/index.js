@@ -101,7 +101,7 @@ export const addevent = event => dispatch => {
 
     export const getData = () => dispatch => {
     dispatch({ type: FETCH_DATA_START });
-    axios
+    return axios
         .get(`https://momdate-app.herokuapp.com/experiences/`, {
         headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
@@ -144,18 +144,17 @@ export const addevent = event => dispatch => {
     export const VIEW_EVENT_SUCCESS = 'VIEW_EVENT_SUCCESS';
     export const VIEW_EVENT_FAILURE = 'VIEW_EVENT_FAILURE';
 
-    export const viewEvent = event => dispatch => {
-        console.log(event)
-        let formatEvent={}
-        event.forEach(e => formatEvent = {...formatEvent, ...e})
-        console.log('formatted event:', formatEvent.expid)
+    export const viewEvent = (expid, event) => dispatch => {
+    
+        let formatEvent = event.find(event => event.expid === expid)
+        console.log(formatEvent.expid)
         dispatch({ type: VIEW_EVENT_START });
         return axios
-        .get(`https://momdate-app.herokuapp.com/experience/${formatEvent.expid}`, formatEvent, {
+        .get(`https://momdate-app.herokuapp.com/experience/${formatEvent.expid}`, {
             headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
-            console.log(res.data)
+            console.log(res)
             dispatch({ type: VIEW_EVENT_SUCCESS, payload: res.data });
         })
         .catch(err => {

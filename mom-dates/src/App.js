@@ -1,16 +1,19 @@
 import React from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import './App.css';
+import { connect } from 'react-redux';
 
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import DashBoard from './components/DashBoard';
 import NewEvent from './components/NewEvent';
+import ExperienceEvents from './components/ExperienceEvents';
 // import NavBar from './components/NavBar';
 import SearchBar from './components/SearchBar';
 import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+function App({ activeCard }) {
+  console.log(activeCard)
   return (
 
     <div className="App">
@@ -46,10 +49,14 @@ function App() {
       <Route exact path="/" component={SignUp} />
       <PrivateRoute exact path= "/dashboard" component={DashBoard} />
       <Route path="/login" component={Login} />
+      <Route path="/experience/:id" render={ props => <ExperienceEvents {...props} event={activeCard}  /> } />
       <Route exact path= "/events" component={NewEvent} />
       <Route exact path="/search" component={SearchBar} />
     </div>
   );
 }
 
-export default withRouter(App);
+const mapStateToProps = ({activeCard}) => ({activeCard})
+
+
+export default withRouter(connect(mapStateToProps, {})(App));
