@@ -18,7 +18,7 @@ class NewEvent extends React.Component {
     onSubmit = form =>{
         if(this.state.currentStep>2){
             this.props.addevent(this.state.form).then(()=>this.props.history.push('/dashboard') )
-            window.location.reload();
+            // window.location.reload();
         }
         this.setState({
            form:[ 

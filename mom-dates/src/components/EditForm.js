@@ -5,26 +5,24 @@ import { editevent  } from '../actions'
 class EditForm extends React.Component{
     state= {
         event: this.props.activeCard,
-        title: '',
-        explocation: '',
-        dates:'',
-        blurb:'',
-        expdesc:'',
-        availability: '',
-        expimgurl: '',
-        price: '',
-        eventId:''
+        title: this.props.activeCard.title,
+        explocation: this.props.activeCard.explocation,
+        dates:this.props.activeCard.dates,
+        blurb:this.props.activeCard.blurb,
+        expdesc:this.props.activeCard.expdesc,
+        availability: this.props.activeCard.availability,
+        expimgurl: this.props.activeCard.expimgurl,
+        price: this.props.activeCard.price,
+        eventId:this.props.activeCard.eventId
     };
 
     handleChanges = e => {
         e.preventDefault();
         let value = e.target.value
        this.setState({
+           ...this.state, 
+           [e.target.name]: value,
         eventId: this.props.activeCard.expid,
-          event: {
-              ...this.state.event.activeCard,
-              [e.target.name]: value
-          }
        });
     }
 
@@ -33,7 +31,7 @@ class EditForm extends React.Component{
     };
 
     render(){
-        console.log(this.state.eventId)
+        // console.log(this.state.eventId)
         return(
             <>
              <div>
@@ -47,7 +45,7 @@ class EditForm extends React.Component{
                         name="title"
                         placeholder="Enter Your Event Name"
                         onChange = {this.handleChanges}
-                        value={this.state.event.title}
+                        value={this.state.title}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -57,7 +55,7 @@ class EditForm extends React.Component{
                         name="explocation"
                         placeholder="Enter Your Event Location"
                         onChange = {this.handleChanges}
-                        value={this.state.event.explocation}
+                        value={this.state.explocation}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -67,7 +65,7 @@ class EditForm extends React.Component{
                     name="dates"
                     placeholder="Select Dates"
                     onChange = {this.handleChanges}
-                    value={this.state.event.dates}
+                    value={this.state.dates}
                     />
                 </FormGroup>
                     <ButtonGroup>
@@ -81,7 +79,7 @@ class EditForm extends React.Component{
                         name="blurb"
                         placeholder="Enter Summary Here"
                         onChange = {this.handleChanges}
-                        value={this.state.event.blurb}
+                        value={this.state.blurb}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -91,7 +89,7 @@ class EditForm extends React.Component{
                         name="expdesc"
                         placeholder="Enter The Deets"
                         onChange = {this.handleChanges}
-                        value={this.state.event.expdesc}
+                        value={this.state.expdesc}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -101,7 +99,7 @@ class EditForm extends React.Component{
                         name="availability"
                         placeholder="Enter spots available."
                         onChange = {this.handleChanges}
-                        value={this.state.event.availability}
+                        value={this.state.availability}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -111,7 +109,7 @@ class EditForm extends React.Component{
                         name="expimgurl"
                         placeholder="Enter Your Event Image"
                         onChange = {this.handleChanges}
-                        value={this.state.event.expimgurl}
+                        value={this.state.expimgurl}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -121,7 +119,7 @@ class EditForm extends React.Component{
                         name="price"
                         placeholder="$0.00 per person"
                         onChange = {this.handleChanges}
-                        value={this.state.event.price}
+                        value={this.state.price}
                         />
                     </FormGroup>
                         <Button className="button-style"  onClick={(e)=>{this.editEvent(this.state.eventId)}}>Edit</Button>

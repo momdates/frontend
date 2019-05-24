@@ -56,7 +56,7 @@ viewEvent= (e, expid, events) => {
 render(){
     return(
         <>
-        <div>
+        <div className="signup-form">
             <h1>Search</h1>
             <Form className="form" onSubmit={this.handleSubmit}>
                 <FormGroup>
@@ -91,9 +91,10 @@ render(){
                     </FormGroup>
             </Form>
         </div>
-        <div className="near-you" id="location">
+        <div className="dashboard">
+        <div className="dash-content" id="location">
                 <h1>Explore</h1>
-                <div className="dash-content">
+                <div>
             {this.state.eventsData.length && this.state.eventsData.map((event,i) =>{
                 return (
                     <EventCard event={event} events={this.props.events}  key={i} viewEvent={this.viewEvent}  />
@@ -101,6 +102,7 @@ render(){
             })
 
             }
+            </div>
             </div>
             </div>
         </>

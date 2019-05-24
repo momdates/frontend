@@ -11,7 +11,7 @@ const ExperienceEvents= props =>{
         <div className="dashboard">
             <Button onClick={props.history.goBack}> Back </Button>
         <div className="dash-content">
-                    <div className="dash-card">
+                    <div className="card-info">
                     <Card>
                         <CardImg top width="100%" src={props.event.expimgurl} alt="Adventure Card" />
                         <CardBody>
