@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonGroup, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Form, FormGroup, Label, Input} from 'reactstrap';
 import EventCard from '../components/EventCard';
 import { connect } from 'react-redux';
 
@@ -25,7 +25,8 @@ handleChanges = e => {
     e.preventDefault();
     // console.log(e.target.value)
     this.setState({
-      search: e.target.value
+      search: e.target.value,
+      location: e.target.value
     },
      ()=> { 
         //  console.log(this.state.eventsData)
@@ -68,7 +69,7 @@ render(){
                     value={this.state.search}
                     />
                     </FormGroup>
-                    {/* <FormGroup>
+                    <FormGroup>
                         <Label for="location">Choose location</Label>
                         <Input
                         type="text"
@@ -87,7 +88,7 @@ render(){
                         onChange = {this.handleChanges}
                         value={this.state.dates}
                         />
-                    </FormGroup> */}
+                    </FormGroup>
             </Form>
         </div>
         <div className="near-you" id="location">

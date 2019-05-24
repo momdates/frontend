@@ -6,7 +6,7 @@ import { addevent } from '../actions';
 import EventForm from './EventComponents/EventForm';
 import EventSummary from './EventComponents/EventSummary';
 import EventPhoto from './EventComponents/EventPhoto'
-import EventPost from './EventComponents/EventPost';
+
 
 
 class NewEvent extends React.Component {

@@ -1,35 +1,37 @@
 import React from 'react';
-import { Route, Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
+// import { connect } from 'react-redux';
 
 const PrivateRoute = ({
     component: Component,
-    token,
+    // token,
     errorStatusCode, 
     ...rest
 }) => {
     return (
         <Route
         {...rest}
-        render ={props =>
-        token ? (
-            <Component {...props} />
-        ) : (
-            <Redirect to="/login" />
-        )
-        }
+        render ={props =>{
+        if(localStorage.getItem('token')) {
+           return <Component {...props} />
+         } else {
+           return <Redirect to="/login" />
+         }
+        }}
         />
     );
 };
 
-const mapStateToProps = ({ token, errorStatusCode }) => ({
-    errorStatusCode,
-    token
-});
+export default PrivateRoute
 
-export default withRouter(
-    connect(
-        mapStateToProps,
-        {}
-    )(PrivateRoute)
-);
+// const mapStateToProps = ({ token, errorStatusCode }) => ({
+//     errorStatusCode,
+//     token
+// });
+
+// export default withRouter(
+//     connect(
+//         mapStateToProps,
+//         {}
+//     )(PrivateRoute)
+// );

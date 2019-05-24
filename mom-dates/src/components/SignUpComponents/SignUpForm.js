@@ -66,7 +66,7 @@ export class SignUpForm extends React.Component{
                         </div>
                         <h6>Already have an account?</h6>
                         <div className="sign-in">
-                        <Button className="signup-signin" outline color="secondary">Sign In </Button>
+                        <Button className="signup-signin" outline color="secondary" href="/dashboard">Sign In </Button>
                         </div>
                     
                 </div>

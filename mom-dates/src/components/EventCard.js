@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
-import { connect } from 'react-redux';
+
 
 const EventCard= props =>{
     // console.log(props.event)

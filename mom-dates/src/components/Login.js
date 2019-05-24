@@ -30,6 +30,7 @@ class Login extends React.Component{
 
     render(){
         return(
+            <div>
             <div className="login-form">
                 <div>
                <h1>Welcome back.</h1>
@@ -58,7 +59,18 @@ class Login extends React.Component{
                     <Button className="button-style">Sign In</Button> 
                     </Form>
                     </div>
-            </div>
+                    <h6>or</h6>
+                    </div>
+                    <div className="signup-buttons">
+                        <Button color="primary"><i className="fab fa-facebook-square"></i> Log In With Facebook</Button>
+                        <Button outline color="secondary"><i className="far fa-envelope"></i>Log In With Gmail</Button>
+                        </div>
+                        <h6>Don't have an account?</h6>
+                        <div className="sign-in">
+                        <Button className="signup-signin" outline color="secondary" href="/">Sign Up </Button>
+                    </div>
+                </div>
+            
         )
     }
 }

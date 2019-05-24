@@ -74,10 +74,11 @@ export const addevent = event => dispatch => {
     export const EDIT_EVENT_SUCCESS = 'EDIT_EVENT_SUCCESS';
     export const EDIT_EVENT_FAILURE = 'EDIT_EVENT_FAILURE';
 
-    export const editevent = event => dispatch => {
+    export const editevent = id => dispatch => {
+        console.log(id)
         dispatch({ type: EDIT_EVENT_START });
         return axios
-        .put(`https://momdate-app.herokuapp.com/exp/${event.id}`, event, {
+        .put(`https://momdate-app.herokuapp.com/exp/${id}`, {
             headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
@@ -122,17 +123,19 @@ export const addevent = event => dispatch => {
     export const DELETE_FAILURE = 'DELETE_FAILURE';
 
     export const deleteEvent = id => dispatch => {
+        console.log(id)
     dispatch({ type: DELETE_START });
-    axios
+    return axios
         .delete(`https://momdate-app.herokuapp.com/exp/${id}`, {
         headers: {"Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
+            console.log('res data:', res)
         dispatch({ type: DELETE_SUCCESS, payload: res.data });
         })
         .catch(err => {
         console.log('call failed: ', err.response);
-        if (err.response.status === 403) {
+        if (err.response === 403) {
             dispatch({ type: USER_UNAUTHORIZED, payload: err.response });
         } else {
             dispatch({ type: DELETE_FAILURE, payload: err.response });
@@ -147,14 +150,14 @@ export const addevent = event => dispatch => {
     export const viewEvent = (expid, event) => dispatch => {
     
         let formatEvent = event.find(event => event.expid === expid)
-        console.log(formatEvent.expid)
+        
         dispatch({ type: VIEW_EVENT_START });
         return axios
         .get(`https://momdate-app.herokuapp.com/experience/${formatEvent.expid}`, {
             headers: { "Authorization":"Bearer " + `${localStorage.getItem('token')}` }
         })
         .then(res => {
-            console.log(res)
+            // console.log(res)
             dispatch({ type: VIEW_EVENT_SUCCESS, payload: res.data });
         })
         .catch(err => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Nav, NavItem, NavLink, Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Nav, NavItem, NavLink, Button } from 'reactstrap';
 import EventCard from './EventCard';
 import { connect } from 'react-redux';
 
@@ -24,7 +23,7 @@ editEvent = (e) => {
     e.preventDefault();
     this.props.editEvent(this.props.events)
     // .then(()=>{
-    //     this.setState({editingEvent: null})
+    //     this.setState({editingEventId: null})
     // })
 }
 
