@@ -78,11 +78,11 @@ export const EDIT_EVENT_START = "EDIT_EVENT_START";
 export const EDIT_EVENT_SUCCESS = "EDIT_EVENT_SUCCESS";
 export const EDIT_EVENT_FAILURE = "EDIT_EVENT_FAILURE";
 
-export const editevent = id => dispatch => {
-  console.log(id);
+export const editevent = (id, event) => dispatch => {
+  console.log("event:", event);
   dispatch({ type: EDIT_EVENT_START });
   return axios
-    .put(`https://momdate-app.herokuapp.com/exp/${id}`, {
+    .put(`https://momdate-app.herokuapp.com/exp/${id}`, event, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
     .then(res => {
