@@ -143,6 +143,9 @@ nav {
   align-items:center;
 }
 
+.dash-nav a {
+  color:grey;
+}
 
 .dash-content{
   width:400px;
@@ -211,4 +214,8 @@ nav {
 
 .interest-htag{
   padding: 0 7rem;
+}
+
+.new-event-btn{
+  padding: 0.1rem 0.5rem;
 }

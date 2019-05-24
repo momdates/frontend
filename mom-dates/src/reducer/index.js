@@ -33,6 +33,7 @@ const initialState ={
     deletingEvent: false,
     editingEvent: false,
     viewingEvent: false,
+    activeCard: 0,
     error: '',
     errorStatusCode:null,
     fetchingEvents: false,
@@ -178,7 +179,7 @@ const reducer = (state = initialState, action) => {
                 viewingEvent:false,
                 error:'',
                 errorStatusCode:null,
-                events: action.payload
+                activeCard: action.payload
             };
         case VIEW_EVENT_FAILURE:
             return{

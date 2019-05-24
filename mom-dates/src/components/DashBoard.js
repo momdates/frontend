@@ -1,70 +1,88 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { Nav, NavItem, NavLink, Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
-import EventCard from './EventCard';
-import { connect } from 'react-redux';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { Nav, NavItem, NavLink, Button } from "reactstrap";
+import EventCard from "./EventCard";
+import { connect } from "react-redux";
 
-import { getData, deleteEvent, editevent, viewEvent } from '../actions'
+import { getData, deleteEvent, editevent, viewEvent } from "../actions";
 
 class DashBoard extends React.Component {
-state={
-    deletingEvent: null,
-    editingEvent: null,
-    viewingEvent: null,
-    fetchingEvents: false
-}
+  state = {
+    // deletingEvent: null,
+    // editingEvent: null,
+    // viewingEvent: null,
+    // fetchingEvents: false,
+    // events:[]
+  };
 
-componentDidMount(){
+  componentDidMount() {
     this.props.getData();
-}
+  }
 
-editEvent = (e) => {
+  editEvent = e => {
     e.preventDefault();
-    this.props.editEvent(this.props.events).then(()=>{
-        this.setState({editingEvent: null})
-    })
-}
+    this.props.editEvent(this.props.events);
+    // .then(()=>{
+    //     this.setState({editingEventId: null})
+    // })
+  };
 
-viewEvent= (e) => {
+  viewEvent = (e, expid, events) => {
     e.preventDefault();
-    this.props.viewEvent(this.props.events.id).then(()=>{
-        this.setState({viewingEvent:null})
-    })
-}
+    // console.log(events);
+    this.props
+      .viewEvent(expid, events)
+      .then(() => this.props.history.push(`/experience/${expid}`));
+  };
 
-render(){
+  deleteEvent = id => {
+    this.setState({ deletingEventID: id });
+    this.props.deleteEvent(id);
+  };
+
+  render() {
     return (
-        <div className="dashboard">
-            <div className="dash-nav">
-            <Nav>
-                <NavItem>
-                    <NavLink href="#interests">Picked For You</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink href="#location">Near You</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink href="#new-events">Try Something New</NavLink>
-                </NavItem>
-                <NavItem>  
-                    <Button outline color="secondary" href="/events" ><i className="fas fa-plus"></i> New Event</Button>
-                </NavItem>
-            </Nav>
-            </div>
-            <div className="near-you" id="location">
-                <h1>Near You</h1>
-                <div className="dash-content">
-            {this.props.events.map((event,i) =>{
+      <div className="dashboard">
+        <div className="dash-nav">
+          <Nav>
+            <NavItem>
+              <NavLink href="#interests">Picked For You</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#location">Near You</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#new-events">Try Something New</NavLink>
+            </NavItem>
+            <NavItem>
+              <Button
+                className="new-event-btn"
+                outline
+                color="secondary"
+                href="/events"
+              >
+                <i className="fas fa-plus" /> New Event
+              </Button>
+            </NavItem>
+          </Nav>
+        </div>
+        <div className="dash-content">
+          <div className="near-you" id="location">
+            <h1>Near You</h1>
+            {this.props.events.length &&
+              this.props.events.map((event, i) => {
                 return (
-                    <EventCard event={event}  key={i} expimgurl={event.expimgurl} title={event.title} price={event.price} date={event.date} expdesc={event.expdesc} viewEvent={this.viewEvent}  />
-                )
-            })
-
-            }
-            </div>
-            </div>
-            {/* <div className="dash-content">
+                  <EventCard
+                    event={event}
+                    events={this.props.events}
+                    key={i}
+                    viewEvent={this.viewEvent}
+                  />
+                );
+              })}
+          </div>
+        </div>
+        {/* <div className="dash-content">
                 <div className="near-you" id="location">
                     <h1>Near You</h1>
                     <div className="dash-card">
@@ -120,16 +138,26 @@ render(){
                     </div>
                 </div>
             </div> */}
-
-        </div>
-    )
-}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({
-    deletingEvent, events, fetchingEvents, editingEvent
+  deletingEvent,
+  events,
+  fetchingEvents,
+  editingEvent
 }) => ({
-    deletingEvent, events, fetchingEvents, editingEvent
-})
+  deletingEvent,
+  events,
+  fetchingEvents,
+  editingEvent
+});
 
-export default withRouter(connect(mapStateToProps, { getData, deleteEvent, editevent, viewEvent })(DashBoard));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getData, deleteEvent, editevent, viewEvent }
+  )(DashBoard)
+);

@@ -1,32 +1,72 @@
 import React from 'react';
-import { Button, ButtonGroup, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Form, FormGroup, Label, Input} from 'reactstrap';
+import EventCard from '../components/EventCard';
+import { connect } from 'react-redux';
+
+import {viewEvent, getData } from '../actions';
 
 class SearchBar extends React.Component{
 state={
     eventsData: [],
-    searchDisplay: []
+    search:''
 }
 
 componentDidMount(){
-    this.setState({
-        eventsData: this.props.events,
-        searchDisplay: this.props.searchDisplay
+    this.props.getData()
+    .then(()=>{
+        this.setState({
+            eventsData: this.props.events
+        })
     })
+}
+
+
+handleChanges = e => {
+    e.preventDefault();
+    // console.log(e.target.value)
+    this.setState({
+      search: e.target.value,
+      location: e.target.value
+    },
+     ()=> { 
+        //  console.log(this.state.eventsData)
+        let experiences = this.props.events.filter(event => event.title.includes(this.state.search))
+        console.log(experiences)
+        experiences = (experiences.length) ? experiences : this.props.events 
+    this.setState({eventsData : experiences})
+    })     
+    // console.log(experiences)
+    // this.setState({
+    // eventsData : experiences
+    // })
+   
+}
+
+handleSubmit = e => {
+    e.preventDefault();
+}
+
+viewEvent= (e, expid, events) => {
+    e.preventDefault();
+    // console.log(events);
+    this.props.viewEvent(expid, events)
+    .then(()=>this.props.history.push(`/experience/${expid}`))
 }
 
 render(){
     return(
-        <div>
+        <>
+        <div className="signup-form">
             <h1>Search</h1>
-            <Form className="form">
+            <Form className="form" onSubmit={this.handleSubmit}>
                 <FormGroup>
                     <Label for="search"></Label>
                     <Input 
                     type="text"
-                    name="searchDisplay"
+                    name="search"
                     placeholder="Search for event here"
                     onChange={this.handleChanges}
-                    value={this.state.searchDisplay}
+                    value={this.state.search}
                     />
                     </FormGroup>
                     <FormGroup>
@@ -49,12 +89,29 @@ render(){
                         value={this.state.dates}
                         />
                     </FormGroup>
-                
             </Form>
         </div>
+        <div className="dashboard">
+        <div className="dash-content" id="location">
+                <h1>Explore</h1>
+                <div>
+            {this.state.eventsData.length && this.state.eventsData.map((event,i) =>{
+                return (
+                    <EventCard event={event} events={this.props.events}  key={i} viewEvent={this.viewEvent}  />
+                )
+            })
+
+            }
+            </div>
+            </div>
+            </div>
+        </>
     )
 }
 
 }
 
-export default SearchBar
+
+const mapStateToProps= ({ events }) => ({ events })
+
+export default connect(mapStateToProps, { viewEvent, getData })(SearchBar)
